@@ -1,4 +1,6 @@
 const request = require('request');
+const sharp = require('sharp');
+const fs = require('fs');
 module.exports = function(bot) 
 {
     bot.registerCommand("weather", (msg, args) => {
@@ -148,6 +150,24 @@ module.exports = function(bot)
         description: "Reverse string!",
         fullDescription: "This command allows you to reverse whole text",
         usage: "<text>"
+    });
+
+    bot.registerCommand("osu", (msg, args) => {
+        var data;
+                
+        request.defaults({ encoding: null }).get('https://lemmmy.pw/osusig/sig.php?colour=blue&uname=', function (err, res, body) {
+           if(err) { console.log(err); return err;}
+            data = body;
+        });
+
+        setTimeout(() => 
+        {
+            console.log(data);
+            var file = new Object();
+            file.file = data;
+            file.name = args[0].png;
+            bot.createMessage(msg.channel.id, "", file);
+        },1000);
     });
 
 }
