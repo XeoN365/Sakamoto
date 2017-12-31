@@ -29,6 +29,7 @@ module.exports = function(bot)
         }, 1000);
         
         bot.registerCommand("test", (msg, args) => {
+            console.log("Executing Test");
             bot.createMessage(msg.channel.id, {
                 embed: {
                     title: "I'm an embed!", // Title of the embed
