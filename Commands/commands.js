@@ -24,10 +24,10 @@ module.exports = function(bot)
         
         setTimeout(() => {
             console.log(weather.weather[0].description);
-            //bot.createMessage(msg.channel.id, "Weather: "+weather.weather[0].description);
+            bot.createMessage(msg.channel.id, "Weather: "+weather.weather[0].description);
             
         }, 1000);
-        return weather.weather[0].description;
+        
         
     })
 }
