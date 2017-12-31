@@ -27,35 +27,34 @@ module.exports = function(bot)
             bot.createMessage(msg.channel.id, "Weather: "+weather.weather[0].description);
             
         }, 1000);
-    })
 
-    bot.registerCommand("test", (msg, args) => {
-        console.log("Executing Test");
         bot.createMessage(msg.channel.id, {
             embed: {
-                title: "I'm an embed!", // Title of the embed
-                description: "Here is some more info, with **awesome** formatting.\nPretty *neat*, huh?",
+                title: "Weather for "+weather.name+", "+weather.sys.country, // Title of the embed
+                description: "",
                 author: { // Author property
-                    name: msg.author.username,
-                    icon_url: msg.author.avatarURL
+                    name: "Weather",
+                    icon_url: ":white_sun_cloud:"
                 },
                 color: 0x008000, // Color, either in hex (show), or a base-10 integer
                 fields: [ // Array of field objects
                     {
-                        name: "Some extra info.", // Field title
-                        value: "Some extra value.", // Field
+                        name: "Temp", // Field title
+                        value: weather.main.temp-273.15+"°C", // Field
                         inline: true // Whether you want multiple fields in same line
                     },
                     {
-                        name: "Some more extra info.",
-                        value: "Another extra value.",
+                        name: "Wind",
+                        value: weather.wind.speed+"m/S",
                         inline: true
                     }
-                ],
-                footer: { // Footer text
-                    text: "Created with Eris."
-                }
+                ]
             }
         });
+    })
+
+    bot.registerCommand("test", (msg, args) => {
+        
+        
     });
 }
