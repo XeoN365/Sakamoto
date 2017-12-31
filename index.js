@@ -8,6 +8,7 @@ var bot = new Eris.CommandClient("Mzk2NzEwNDM2NjIxMzg1NzI4.DSlanw.b7jjxvKwJsPi34
 });
 
 var commands = require("./Commands/commands")(bot);
+var update = require("./Commands/autoupdate")(bot);
 
 bot.on("ready", () => { // When the bot is ready
     console.log("Ready!"); // Log "Ready!"
