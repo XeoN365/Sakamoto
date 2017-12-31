@@ -49,6 +49,10 @@ module.exports = function(bot)
                 }
             });
         }, 1000);
+    }, {
+        description: "Check the weather",
+        fullDescription: "Allows you to check the weather in provided town/country",
+        usage: "<text>"
     })
 
     function round(value, precision) {
@@ -65,8 +69,12 @@ module.exports = function(bot)
         });
         setTimeout(() => 
         {
-            bot.createMessage(msg.channel.id, "[:8ball:] **8Ball**: **"+data.magic.answer+"**");
+            bot.createMessage(msg.channel.id, ":8ball: | **"+data.magic.answer+"**");
         },1000);
+    }, {
+        description: "Check your destiny!",
+        fullDescription: "8Ball is here for you to help you with your undecisive mind!",
+        usage: "<text>"
     });
 
     bot.registerCommand("yoda", (msg, args) => {
@@ -79,7 +87,7 @@ module.exports = function(bot)
         });
         setTimeout(() => 
         {
-            bot.createMessage(msg.channel.id, "[:yoda:] **Yoda**: **"+data.contents.translated+"**");
+            bot.createMessage(msg.channel.id, ":yoda: | **"+data.contents.translated+"**");
         },1000);
     });
 
@@ -106,7 +114,40 @@ module.exports = function(bot)
             {
                 emoji = ":x:";
             }
-            bot.createMessage(msg.channel.id, "["+emoji+"] **Genderize**: Name: **"+data.name+"** is for **"+data.gender+"**");
+            bot.createMessage(msg.channel.id, emoji+" | Name: **"+data.name+"** is for **"+data.gender+"**");
         },1000);
+    }, {
+        description: "Check if your name is for male or female!",
+        fullDescription: "This command allows you to check if the name that your parents gave, suits your gender!",
+        usage: "<text>"
     });
+
+    bot.registerCommand("coin", (msg, args) => {
+       var random = Math.random();
+       var coin;
+       if(random < 0.5)
+       {
+            coin = "Heads";
+       }
+       else
+       {
+           coin = "Tails";
+       }
+
+       bot.createMessage(msg.channel.id, "CT | "+msg.author.mention+" It's **"+coin+"**");
+    }, {
+        description: "Flip coin!",
+        fullDescription: "This command allows you to flip a coin!",
+        usage: ""
+    });
+
+    bot.registerCommand("reverse", (msg, args) => {
+        var text = args.join(" ").split("").reverse().join("");
+        bot.createMessage(msg.channel.id, "Rev | "+text);
+    }, {
+        description: "Reverse string!",
+        fullDescription: "This command allows you to reverse whole text",
+        usage: "<text>"
+    });
+
 }
