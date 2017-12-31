@@ -21,7 +21,7 @@ module.exports = function(bot)
             
             bot.createMessage(msg.channel.id, {
                 embed: {
-                    title: "Weather for "+weather.name+", "+weather.sys.country, // Title of the embed
+                    title: "Weather for "+weather.name+", :flag_"+weather.sys.country.toLowerCase()+":", // Title of the embed
                     description: ""+weather.weather[0].description,
                     author: { // Author property
                         name: "Weather",
@@ -43,11 +43,6 @@ module.exports = function(bot)
                             name: "Wind",
                             value: weather.wind.speed+" m/s",
                             inline: true
-                        },
-                        {
-                            name: "Wind2",
-                            value: weather.wind.speed+"m/S",
-                            inline: false
                         }
                     ]
                     
@@ -85,6 +80,33 @@ module.exports = function(bot)
         setTimeout(() => 
         {
             bot.createMessage(msg.channel.id, "[:yoda:] **Yoda**: **"+data.contents.translated+"**");
+        },1000);
+    });
+
+    bot.registerCommand("genderize", (msg, args) => {
+        var data;
+        console.log("Message Received: "+msg+" Args: "+args)
+        request('https://api.genderize.io/?name='+args[0], {json: true}, (err,res,body) => {
+            if(err) { return err};
+            
+            data = body;
+        });
+        setTimeout(() => 
+        {
+            var emoji;
+            if(data.gender == "male")
+            {
+                emoji = ":man_dancing:";
+            }
+            else if(data.gender == "female")
+            {
+                emoji = ":dancer:";
+            }
+            else
+            {
+                emoji = ":x:";
+            }
+            bot.createMessage(msg.channel.id, "["+emoji+"] **Genderize**: Name: **"+data.name+"** is for **"+data.gender+"**");
         },1000);
     });
 }
