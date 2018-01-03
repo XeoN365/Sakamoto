@@ -153,21 +153,20 @@ module.exports = function(bot)
     });
 
     bot.registerCommand("osu", (msg, args) => {
-        var data;
-                
-        request.defaults({ encoding: null }).get('https://lemmmy.pw/osusig/sig.php?colour=blue&uname=', function (err, res, body) {
-           if(err) { console.log(err); return err;}
-            data = body;
-        });
-
-        setTimeout(() => 
-        {
-            console.log(data);
-            var file = new Object();
-            file.file = data;
-            file.name = args[0].png;
-            bot.createMessage(msg.channel.id, "", file);
-        },1000);
+        bot.createMessage(msg.channel.id, {
+            embed: {
+                title: "Osu! | "+ args[0]+" Statistics",
+                image: {
+                    url: "https://lemmmy.pw/osusig/sig.php?colour=blue&uname="+args[0],
+                    width: 338,
+                    height: 94 
+                }
+            }
+        })
+    }, {
+        description: "Osu Statistaks",
+        fullDescription: "Show given player's statistics",
+        usage: "<text>"
     });
 
 }
