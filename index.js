@@ -2,7 +2,7 @@ const Eris = require("eris");
 const token = require("./token");
 
 // Replace BOT_TOKEN with your bot account's token
-var bot = new Eris.CommandClient(token.token, {}, {
+var bot = new Eris.CommandClient(token.getToken(), {}, {
     description: "Sakamoto Bot Powered By Eris",
     name: "Sakamoto",
     owner: "nJoy",
