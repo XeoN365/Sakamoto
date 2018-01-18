@@ -21,7 +21,7 @@ module.exports = function(bot) {
             return "Invalid Input";
         }
         var messages = bot.getMessages(msg.channel.id, limit= args[0], before = msg.id );
-        console.log("Messages: " +messages);
+        console.log("Messages: " +messages[2]);
 
         for(var i = 0; i < messages.Length; i ++)
         {
