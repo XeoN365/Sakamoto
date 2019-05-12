@@ -1,4 +1,4 @@
-const request = require('request');
+﻿const request = require('request');
 const sharp = require('sharp');
 const fs = require('fs');
 module.exports = function(bot) 
@@ -10,6 +10,7 @@ module.exports = function(bot)
             return "Invalid Input!";
         }
         var weather;
+	var newVar;
         var town  = args;
         request('http://api.openweathermap.org/data/2.5/weather?q='+ town +'&appid=c7899ccf9b61fefbbc5050c908135f48', {json: true}, (err,res,body) => {
             if(err) { return err};
